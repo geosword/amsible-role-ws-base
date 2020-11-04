@@ -1,2 +1,82 @@
 ---
-# tasks file for ansible-role-ws-base
+
+# check for molecule
+- name: setfact
+  set_fact:
+    moleculerun: "{{ lookup('env','MOLECULE_SCENARIO_DIRECTORY') | default('nomolecule') }}"
+
+# We want this to run when its a role being applied to a real host or vm,
+# but not when running in molecule. The prepare script will take care of that.
+# This is ostensibly so that we dont have to disable the idepotence checks.
+# because raw modules will always fail this. We cant tag them either with
+# molecule-idempotence-notest
+
+- name: only run this if we're NOT running in molecule
+  block:
+    - name: "check for python"
+      raw: test -e /usr/bin/python
+      changed_when: false
+      ignore_errors: true
+      register: pythoninstalled
+
+    - name: Synchronise the package databases  # noqa 301
+      raw: /usr/bin/pacman -Syy
+
+    - name: install python if its not there.
+      raw: /usr/bin/pacman -S --noconfirm python
+      when:
+        - pythoninstalled.rc != 0
+  when:
+    - moleculerun == 'nomolecule'
+
+
+- name: download pacman mirror list
+  get_url:
+    url: "{{ wsbase_pacman_mirror_list_url }}"
+    dest: "/etc/pacman.d/mirrorlist"
+    force: true
+  tags:
+    - molecule-idempotence-notest
+
+- name: "uncomment `#Server` in pacman mirror list"
+  replace:
+    dest: "/etc/pacman.d/mirrorlist"
+    regexp: '^#Server'
+    replace: 'Server'
+  tags:
+    - molecule-idempotence-notest
+
+- name: overwrite pacman.d/gnupg/gpg.conf to override the default keyserver
+  template:
+    src: "{{ wsbase_pacman_gpg_conf_template }}"
+    dest: /etc/pacman.d/gnupg/gpg.conf
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Synchronise the package databases
+  command: /usr/bin/pacman -Syy # noqa 301
+  tags:
+    - molecule-idempotence-notest
+
+- name: Refresh the pacman-keys # noqa 301
+  command: /usr/bin/pacman-key --refresh-keys
+  tags:
+    - molecule-idempotence-notest
+
+- name: "uncomment colors"
+  lineinfile:
+    dest: /etc/pacman.conf
+    state: "present"
+    regexp: "^Color"
+    insertafter: "^#Color"
+    line: "Color"
+
+- name: install packages
+  community.general.pacman:
+    name: "{{ wsbase_package_list }}"
+    state: present
+  notify:
+    - "enable cups"
+    - "enable bluetooth"
+    - "enable cronie"

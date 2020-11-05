@@ -6,7 +6,7 @@ driver:
   provider:
     name: virtualbox
 platforms:
-  - name: arch-vagrant
+  - name: geosword-base
     config_options:
       ssh.keep_alive: yes
       ssh.remote_user: "'vagrant'"

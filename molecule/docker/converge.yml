@@ -8,6 +8,4 @@
 
     - name: "Include the role you are developing here"
       include_role:
-        apply:
-          become: true
         name: "ansible-role-ws-base"

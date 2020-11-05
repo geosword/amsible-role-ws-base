@@ -31,9 +31,10 @@ Jinja2==2.11.2
 jinja2-time==0.2.0
 jmespath==0.10.0
 MarkupSafe==1.1.1
-molecule==3.0.8
+molecule==3.2.0a0
 molecule-docker==0.2.4
 molecule-ec2==0.2
+molecule-vagrant==0.5
 monotonic==1.5
 nodeenv==1.5.0
 packaging==20.4
@@ -51,6 +52,7 @@ pyparsing==2.4.7
 python-dateutil==2.8.1
 python-gilt==1.2.3
 python-slugify==4.0.1
+python-vagrant==0.5.15
 PyYAML==5.3.1
 requests==2.24.0
 rich==9.1.0
@@ -61,6 +63,7 @@ selinux==0.2.1
 sh==1.13.1
 shellingham==1.3.2
 six==1.15.0
+subprocess-tee==0.1.3
 tabulate==0.8.7
 text-unidecode==1.3
 toml==0.10.2

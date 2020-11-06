@@ -22,3 +22,20 @@
       raw: /usr/bin/pacman -S --noconfirm vim base-devel
       when:
         - pythoninstalled.rc != 0
+
+    - name: include the scenario defaults
+      include_vars:
+        dir: host_vars/geosword-base
+        extensions:
+          - yml
+
+    - name: "Include the user role"
+      include_role:
+        apply:
+          become: true
+        name: "{{ preprole }}"
+      loop_control:
+        loop_var: preprole
+      loop:
+        - "grog.user"
+        - "grog.authorized-key"

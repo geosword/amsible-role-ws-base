@@ -1,0 +1,41 @@
+- name: download pacman mirror list
+  get_url:
+    url: "{{ wsbase_pacman_mirror_list_url }}"
+    dest: "/etc/pacman.d/mirrorlist"
+    force: true
+  tags:
+    - molecule-idempotence-notest
+
+- name: "uncomment `#Server` in pacman mirror list"
+  replace:
+    dest: "/etc/pacman.d/mirrorlist"
+    regexp: '^#Server'
+    replace: 'Server'
+  tags:
+    - molecule-idempotence-notest
+
+- name: overwrite pacman.d/gnupg/gpg.conf to override the default keyserver
+  template:
+    src: "{{ wsbase_pacman_gpg_conf_template }}"
+    dest: /etc/pacman.d/gnupg/gpg.conf
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Synchronise the package databases
+  command: /usr/bin/pacman -Syy # noqa 301
+  tags:
+    - molecule-idempotence-notest
+
+- name: Refresh the pacman-keys # noqa 301
+  command: /usr/bin/pacman-key --refresh-keys
+  tags:
+    - molecule-idempotence-notest
+
+- name: "uncomment colors"
+  lineinfile:
+    dest: /etc/pacman.conf
+    state: "present"
+    regexp: "^Color"
+    insertafter: "^#Color"
+    line: "Color"

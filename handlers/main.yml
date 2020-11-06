@@ -7,20 +7,3 @@
     enabled: true
   tags:
     - cronie
-
-- name: enable bluetooth
-  systemd:
-    name: bluetooth.service
-    state: started
-    enabled: true
-  tags:
-    - bluetooth
-
-# This starts the socket, so if we access cups it will start it
-- name: enable cups
-  systemd:
-    name: org.cups.cupsd.service
-    state: started
-    enabled: true
-  tags:
-    - cups

@@ -1,0 +1,3 @@
+---
+- src: grog.user
+- src: grog.authorized-key

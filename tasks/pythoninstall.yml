@@ -1,0 +1,14 @@
+---
+- name: "check for python"
+  raw: test -e /usr/bin/python
+  changed_when: false
+  ignore_errors: true
+  register: pythoninstalled
+
+- name: Synchronise the package databases  # noqa 301
+  raw: /usr/bin/pacman -Syy
+
+- name: install python if its not there.
+  raw: /usr/bin/pacman -S --noconfirm python
+  when:
+    - pythoninstalled.rc != 0

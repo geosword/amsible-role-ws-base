@@ -3,11 +3,7 @@ wsbase_user_name: dylanh
 wsbase_user_dir: "/home/{{ user_name }}"
 wsbase_pacman_mirror_list_url: "https://www.archlinux.org/mirrorlist/?country=GB&country=US&protocol=http&protocol=https&ip_version=4&use_mirror_status=on"
 wsbase_pacman_gpg_conf_template: pacman_gpg_conf.j2
-wsbase_pacman_key_servers:
-  - pool.sks-keyservers.net
-  - keyserver.dobrev.eu
-  - keys2.andreas-puls.de
-  - keyserver.taygeta.com
+wsbase_pacman_key_servers: "{{ lookup('community.general.dig', '_pgpkey-http._tcp.eu.pool.sks-keyservers.net', 'qtype=SRV', wantlist=True) }}"
 wsbase_package_list:
   - base-devel
   - bind-tools

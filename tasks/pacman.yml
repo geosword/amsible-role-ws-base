@@ -20,7 +20,7 @@
     - molecule-idempotence-notest
 
 - name: Refresh the pacman-keys # noqa 301
-  command: "/usr/bin/pacman-key --refresh-keys --keyserver {{ item }}"
+  command: "/usr/bin/pacman-key --refresh-keys --keyserver {{ item.split(' ')[3] }}"
   retries: 4
   delay: 2
   with_random_choice: "{{ wsbase_pacman_key_servers }}"

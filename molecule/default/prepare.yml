@@ -4,24 +4,15 @@
   gather_facts: false
   become: true
   tasks:
-    - name: "check for python"
-      raw: test -e /usr/bin/python
+
+    - name: "make sure python is installed"
+      raw: "test -e /usr/bin/python && /usr/bin/pacman -Syy && /usr/bin/pacman -S --noconfirm python"
       changed_when: false
       ignore_errors: true
       register: pythoninstalled
 
-    - name: Synchronise the package databases  # noqa 301
-      raw: /usr/bin/pacman -Syy
-
-    - name: install python if its not there.
-      raw: /usr/bin/pacman -S --noconfirm python
-      when:
-        - pythoninstalled.rc != 0
-
     - name: install some things which arent in the container but are in the tar image
       raw: /usr/bin/pacman -S --noconfirm vim base-devel
-      when:
-        - pythoninstalled.rc != 0
 
     - name: include the scenario defaults
       include_vars:

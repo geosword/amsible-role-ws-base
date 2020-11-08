@@ -11,8 +11,10 @@
 # because raw modules will always fail this. We cant tag them either with
 # molecule-idempotence-notest
 
-- name: only run this if we're NOT running in molecule
-  include: pythoninstall.yml
+- name: "make sure python is installed"
+  raw: "test -e /usr/bin/python && /usr/bin/pacman -Syy && /usr/bin/pacman -S --noconfirm python"
+  changed_when: false
+  ignore_errors: true
   when:
     - moleculerun == 'nomolecule'
 

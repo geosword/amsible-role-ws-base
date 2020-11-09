@@ -1,22 +1,8 @@
 ---
-
-# check for molecule
-- name: setfact
-  set_fact:
-    moleculerun: "{{ lookup('env','MOLECULE_SCENARIO_DIRECTORY') | default('nomolecule') }}"
-
-# We want this to run when its a role being applied to a real host or vm,
-# but not when running in molecule. The prepare script will take care of that.
-# This is ostensibly so that we dont have to disable the idepotence checks.
-# because raw modules will always fail this. We cant tag them either with
-# molecule-idempotence-notest
-
 - name: "make sure python is installed"
   raw: "test -e /usr/bin/python && /usr/bin/pacman -Syy && /usr/bin/pacman -S --noconfirm python"
   changed_when: false
   ignore_errors: true
-  when:
-    - moleculerun == 'nomolecule'
 
 - name: include the pacman setup
   include: pacman.yml

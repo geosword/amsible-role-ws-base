@@ -8,6 +8,6 @@
 
 - name: install packages
   community.general.pacman:
-    name: "{{ wsbase_package_list }}"
+    name: "{{ wsbase_package_list + wsbase_additional_packages }}"
     state: present
   notify: "{{ wsbase_post_install_notfiers }}"

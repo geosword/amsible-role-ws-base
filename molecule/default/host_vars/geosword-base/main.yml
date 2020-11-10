@@ -1,0 +1,3 @@
+---
+wsbase_additional_packages:
+  - openssh

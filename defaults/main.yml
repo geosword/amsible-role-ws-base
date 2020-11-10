@@ -29,5 +29,6 @@ wsbase_package_list:
   - wget
   - whois
   - zsh
+wsbase_additional_packages: []
 wsbase_post_install_notfiers:
   - "enable cronie"

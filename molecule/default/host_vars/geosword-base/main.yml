@@ -1,3 +1,7 @@
 ---
 wsbase_additional_packages:
   - openssh
+wsbase_pip_packages:
+  - virtualenvwrapper
+wsbase_ancillary_dirs:
+  - {path: "{{ wsbase_user_dir }}/.virtualenvs", owner: "{{ wsbase_user_name }}", group: "{{ wsbase_user_name }}", mode: '0764'}

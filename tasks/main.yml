@@ -15,3 +15,12 @@
 - name: install any pip packages
   pip:
     name: "{{ wsbase_pip_packages }}"
+
+- name: create ancillary folders
+  file:
+    path: "{{ item.path }}"
+    state: directory
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+  loop: "{{ base_ancillary_dirs }}"

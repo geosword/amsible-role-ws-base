@@ -1,6 +1,6 @@
 ---
 user_list:
-  - name: dylanh
+  - name: "{{ wsbase_user_name }}"
     uid: 1001
     shell: /usr/bin/zsh
     createhome: true

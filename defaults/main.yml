@@ -19,6 +19,7 @@ wsbase_package_list:
   - neovim
   - net-tools
   - pwgen
+  - python-pip
   - rdiff-backup
   - rsync
   - subversion
@@ -30,5 +31,6 @@ wsbase_package_list:
   - whois
   - zsh
 wsbase_additional_packages: []
+wsbase_pip_packages: []
 wsbase_post_install_notfiers:
   - "enable cronie"

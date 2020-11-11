@@ -11,3 +11,7 @@
     name: "{{ wsbase_package_list + wsbase_additional_packages }}"
     state: present
   notify: "{{ wsbase_post_install_notfiers }}"
+
+- name: install any pip packages
+  pip:
+    name: "{{ wsbase_pip_packages }}"

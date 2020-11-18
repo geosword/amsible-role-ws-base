@@ -32,6 +32,9 @@ jobs:
 
       - name: Give us a sane resolver
         run: sudo sh -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf'
-
+        
+      - name: test name resolution
+        run: dig www.google.com
+        
       - name: Run molecule tests
         run: molecule test --scenario-name docker

@@ -19,6 +19,9 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - name: check out the codebase
+        uses: actions/checkout@v2
+
       - name: set name resolution to something else
         run: sudo sh -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf'
 

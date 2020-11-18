@@ -29,12 +29,9 @@ jobs:
 
       - name: Install test dependencies
         run: pip3 install -r requirements.txt
-
-      - name: Give us a sane resolver
-        run: sudo sh -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf'
-        
+      
       - name: test name resolution
-        run: dig www.google.com
+        run: dig _pgpkey-http._tcp.eu.pool.sks-keyservers.net SRV
         
       - name: Run molecule tests
         run: molecule test --scenario-name docker

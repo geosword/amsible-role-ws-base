@@ -19,19 +19,9 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: check out the codebase
-        uses: actions/checkout@v2
-
-      - name: Setup Python 3
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
-
-      - name: Install test dependencies
-        run: pip3 install -r requirements.txt
-      
+      - name: set name resolution to something else
+        run: sudo sh -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf'
+        
       - name: test name resolution
         run: dig _pgpkey-http._tcp.eu.pool.sks-keyservers.net SRV
-        
-      - name: Run molecule tests
-        run: molecule test --scenario-name docker
+

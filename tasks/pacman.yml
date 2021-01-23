@@ -24,7 +24,8 @@
   retries: "{{ wsbase_pacman_key_refresh_retries }}"
   delay: "{{ wsbase_pacman_key_refresh_delay }}"
   with_random_choice: "{{ wsbase_pacman_key_servers }}"
-  until: result.rc == 0
+  register: keyrefresh
+  until: keyrefresh.rc == 0
   loop_control:
     loop_var: keyserver
   tags:

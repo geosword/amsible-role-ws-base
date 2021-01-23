@@ -6,15 +6,18 @@
   tasks:
 
     - name: "check for python"
-      raw: "test -e /usr/bin/python || /usr/bin/pacman -Sy --noconfirm python"
+      raw: "test -e /usr/bin/python || /usr/bin/pacman -Sy --noconfirm python python-pip"
       changed_when: false
 
     - name: install some things which arent in the container but are in the tar image
       raw: /usr/bin/pacman -S --noconfirm vim base-devel
 
-    - name: include the scenario defaults
+    - name: update everything
+      command: /usr/bin/pacman -Syu --noconfirm
+
+    - name: include the role defaults
       include_vars:
-        dir: host_vars/geosword-base
+        dir: ../../defaults/
         extensions:
           - yml
 

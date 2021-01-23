@@ -3,6 +3,8 @@ skip_list:
   - '405'
   - '503'
   - '106'
+  - '204'
 exclude_paths:
-  - molecule/*
-  - .molecule-scaffold/molecule/*
+  - requirements.yml
+  - molecule/
+  - .molecule-scaffold/molecule/

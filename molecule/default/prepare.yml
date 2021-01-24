@@ -36,6 +36,7 @@
       copy:
         dest: /etc/resolv.conf
         content: "nameserver: 8.8.8.8"
+        unsafe_writes: yes
       become: true
 
     # do some insanity to get the key server lookup to work in github actions

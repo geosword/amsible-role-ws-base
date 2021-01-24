@@ -42,6 +42,7 @@
       copy:
         dest: ./vars/zz_meta_keyservers.yml
         content: |
-          wsbase_pacman_key_servers: {{ temp_key_servers | to_nice_yaml }}
+          wsbase_pacman_key_servers:
+          {{ temp_key_servers | to_nice_yaml }}
         mode: '0444'
       delegate_to: localhost

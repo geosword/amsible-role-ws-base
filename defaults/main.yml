@@ -5,8 +5,8 @@ wsbase_pacman_mirror_list_url: "https://www.archlinux.org/mirrorlist/?country=GB
 wsbase_pacman_gpg_conf_template: pacman_gpg_conf.j2
 # Only do a lookup IF the variable is not set, and then set it in converge, either with a lookup delegated to localhost OR with a command delegated to localhost
 # wsbase_pacman_key_servers: "{{ lookup('community.general.dig', '_pgpkey-http._tcp.eu.pool.sks-keyservers.net', 'qtype=SRV', wantlist=True) }}"
-wsbase_pacman_key_refresh_retries: 4
-wsbase_pacman_key_refresh_delay: 3
+wsbase_pacman_key_refresh_retries: 9
+wsbase_pacman_key_refresh_delay: 5
 wsbase_package_list:
   - base-devel
   - bind-tools

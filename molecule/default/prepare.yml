@@ -38,6 +38,10 @@
         temp_key_servers: "{{ lookup('community.general.dig', '_pgpkey-http._tcp.eu.pool.sks-keyservers.net', 'qtype=SRV', wantlist=True) }}"
       delegate_to: localhost
 
+    - name: debug
+      debug:
+        var: temp_key_servers
+
     - name: output the variable so we can include it later
       copy:
         dest: ./vars/zz_meta_keyservers.yml

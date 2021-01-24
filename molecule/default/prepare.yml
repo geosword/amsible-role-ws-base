@@ -32,6 +32,12 @@
         - "grog.user"
         - "grog.authorized-key"
 
+    - name: try and set the resolver in the molecule container
+      copy:
+        dest: /etc/resolv.conf
+        content: "nameserver: 8.8.8.8"
+      become: true
+
     # do some insanity to get the key server lookup to work in github actions
     - name: set the keyservers
       set_fact:

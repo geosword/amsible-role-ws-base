@@ -32,16 +32,6 @@
         - "grog.user"
         - "grog.authorized-key"
 
-    - name: get the contents of the resolver as it stands
-      slurp:
-        src: /etc/resolv.conf
-      register: resolvconfcontent
-      become: true
-
-    - name: reolv conf content
-      debug:
-        var: resolvconfcontent
-
     # do some insanity to get the key server lookup to work in github actions
     - name: set the keyservers
       set_fact:

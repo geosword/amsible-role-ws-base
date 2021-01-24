@@ -19,10 +19,6 @@
   tags:
     - molecule-idempotence-notest
 
-- name: debug key servers
-  debug:
-    var: wsbase_pacman_key_servers
-
 - name: blarg keyservers
   debug:
     var: wsbase_pacman_key_servers

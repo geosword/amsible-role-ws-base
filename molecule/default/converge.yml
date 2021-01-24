@@ -11,6 +11,10 @@
         wsbase_pacman_key_servers: "{{ lookup('community.general.dig', '_pgpkey-http._tcp.eu.pool.sks-keyservers.net', 'qtype=SRV', wantlist=True) }}"
       delegate_to: localhost
 
+    - name: blarg keyservers
+      debug:
+        var: wsbase_pacman_key_servers
+
     - name: "Include the role you are developing here"
       include_role:
         apply:

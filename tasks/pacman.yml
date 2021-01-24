@@ -19,7 +19,7 @@
   tags:
     - molecule-idempotence-notest
 
-- name: Refresh the pacman-keys # noqa 301
+- name: Refresh the pacman-keys {{ keyserver }} # noqa 301
   command: "/usr/bin/pacman-key --refresh-keys --keyserver {{ keyserver.split(' ')[3] }}"
   retries: "{{ wsbase_pacman_key_refresh_retries }}"
   delay: "{{ wsbase_pacman_key_refresh_delay }}"

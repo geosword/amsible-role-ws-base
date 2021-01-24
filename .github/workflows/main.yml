@@ -25,6 +25,10 @@ jobs:
       - name: set name resolution to something else
         run: sudo sh -c 'echo "nameserver 8.8.8.8" > /etc/resolv.conf'
 
+      - name: set name resolution to something else
+        run: sudo sh -c 'dig srv _pgpkey-http._tcp.eu.pool.sks-keyservers.net'
+
+
       - name: Setup Python 3
         uses: actions/setup-python@v2
         with:

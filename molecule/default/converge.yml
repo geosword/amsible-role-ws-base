@@ -8,7 +8,7 @@
 
     - name: debug
       debug:
-        var: host_vars
+        var: ansible_facts
 
     - name: "Include the role you are developing here"
       include_role:

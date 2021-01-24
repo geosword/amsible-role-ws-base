@@ -21,6 +21,11 @@
         extensions:
           - yml
 
+    - name: set the resolv.conf to something sensible
+      copy:
+        dest: /etc/resolv.conf
+        content: "nameserver 8.8.8.8"
+
     - name: "Include the user role"
       include_role:
         apply:

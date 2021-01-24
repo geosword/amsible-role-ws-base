@@ -8,7 +8,7 @@
 
     - name: set the keyservers
       set_fact:
-        wsbase_pacman_key_servers: "{{ lookup('community.general.dig', '_pgpkey-http._tcp.eu.pool.sks-keyservers.net', 'qtype=SRV', wantlist=True) }}"
+        temp_key_servers: "{{ lookup('community.general.dig', '_pgpkey-http._tcp.eu.pool.sks-keyservers.net', 'qtype=SRV', wantlist=True) }}"
       delegate_to: localhost
 
     - name: blarg keyservers
@@ -20,3 +20,5 @@
         apply:
           become: true
         name: "ansible-role-ws-base"
+      vars:
+        wsbase_pacman_key_servers: "{{ temp_key_servers }}"

@@ -44,4 +44,4 @@
     # for some reason this has stopped working now
     - name: debug
       debug:
-        msg: "{{ lookup('community.general.dig', '_pgpkey-http._tcp.eu.pool.sks-keyservers.net', 'qtype=SRV', wantlist=True)"
+        msg: "{{ lookup('community.general.dig', '_pgpkey-http._tcp.eu.pool.sks-keyservers.net', 'qtype=SRV', wantlist=True) }}"

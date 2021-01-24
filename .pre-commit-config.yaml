@@ -17,3 +17,10 @@ repos:
     rev: 0fd87a9c931865bd343233ecc6bfb015b5e7f037
     hooks:
       - id: check-ansible-vault
+  - repo: https://github.com/ansible/ansible-lint.git
+    rev: v4.3.7
+    hooks:
+      - id: ansible-lint
+        always_run: false
+        pass_filenames: false
+        verbose: false

@@ -41,6 +41,7 @@
     - name: debug
       debug:
         var: temp_key_servers
+      delegate_to: localhost
 
     - name: output the variable so we can include it later
       copy:

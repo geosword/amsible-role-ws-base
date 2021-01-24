@@ -30,3 +30,4 @@ hosts.ini
 hosts.yml
 etcnginx
 molecule/*/temp/
+molecule/vars/zz_meta*.yml

@@ -6,19 +6,14 @@
   gather_facts: true
   tasks:
 
-    - name: set the keyservers
-      set_fact:
-        temp_key_servers: "{{ lookup('community.general.dig', '_pgpkey-http._tcp.eu.pool.sks-keyservers.net', 'qtype=SRV', wantlist=True) }}"
-      delegate_to: localhost
-
-    - name: blarg keyservers
-      debug:
-        var: host_vars['localhost']
+    - name: include the the keyserver names
+      include_vars:
+        dir: ./vars/
+        extensions:
+          - yml
 
     - name: "Include the role you are developing here"
       include_role:
         apply:
           become: true
         name: "ansible-role-ws-base"
-      vars:
-        wsbase_pacman_key_servers: "{{ temp_key_servers }}"

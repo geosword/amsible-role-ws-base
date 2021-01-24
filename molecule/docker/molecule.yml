@@ -1,4 +1,22 @@
 ---
+scenario:
+  test_sequence:
+    - lint
+    - dependency
+    - syntax
+    - lint
+    - create
+    - prepare
+    - converge
+    - verify
+    - destroy
+  destroy_sequence:
+    - cleanup
+    - destroy
+  converge_sequence:
+    - create
+    - prepare
+    - converge
 driver:
   name: docker
 platforms:

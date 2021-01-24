@@ -32,22 +32,16 @@
         - "grog.user"
         - "grog.authorized-key"
 
-    # do some insanity to get the key server lookup to work in github actions
-    - name: set the keyservers
-      set_fact:
-        temp_key_servers: "{{ lookup('community.general.dig', '_pgpkey-http._tcp.eu.pool.sks-keyservers.net', 'qtype=SRV', wantlist=True) }}"
-      delegate_to: localhost
-
-    - name: debug
-      debug:
-        var: temp_key_servers
-      delegate_to: localhost
-
     - name: output the variable so we can include it later
       copy:
         dest: ./vars/zz_meta_keyservers.yml
         content: |
           wsbase_pacman_key_servers:
-          {{ temp_key_servers | to_nice_yaml }}
+          {{ lookup('community.general.dig', '_pgpkey-http._tcp.eu.pool.sks-keyservers.net', 'qtype=SRV', wantlist=True) | to_nice_yaml }}
         mode: '0444'
       delegate_to: localhost
+
+    # for some reason this has stopped working now
+    - name: debug
+      debug:
+        msg: "{{ lookup('community.general.dig', '_pgpkey-http._tcp.eu.pool.sks-keyservers.net', 'qtype=SRV', wantlist=True)"

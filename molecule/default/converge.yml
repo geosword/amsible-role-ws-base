@@ -13,7 +13,7 @@
 
     - name: blarg keyservers
       debug:
-        var: temp_key_servers
+        var: host_vars['localhost']['temp_key_servers']
 
     - name: "Include the role you are developing here"
       include_role:

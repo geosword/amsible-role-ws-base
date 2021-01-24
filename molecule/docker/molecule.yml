@@ -4,7 +4,6 @@ scenario:
     - lint
     - dependency
     - syntax
-    - lint
     - create
     - prepare
     - converge

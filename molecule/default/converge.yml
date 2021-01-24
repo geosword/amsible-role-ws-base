@@ -9,6 +9,8 @@
     - name: include the the keyserver names
       include_vars:
         dir: ./vars/
+        ignore_files:
+          - .keep
         extensions:
           - yml
 

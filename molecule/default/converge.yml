@@ -11,7 +11,7 @@
         wsbase_pacman_key_servers: "{{ lookup('community.general.dig', '_pgpkey-http._tcp.eu.pool.sks-keyservers.net', 'qtype=SRV', wantlist=True) }}"
       when:
         - wsbase_pacman_key_servers is not defined
-        - lookup('env','GH_IN_ACTIONS') | default(true, true) | bool
+        - not lookup('env','GH_IN_ACTIONS') | default(false, true) | bool
 
     - name: "Include the role you are developing here"
       include_role:

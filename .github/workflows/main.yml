@@ -38,6 +38,8 @@ jobs:
 
       - name: output the arch key servers to a variable file because... lookups in molecule in gh actions
         run: ansible-playbook getkeyservers.yml
+        env:
+          GH_IN_ACTIONS: 1
 
       - name: Run molecule tests
         run: molecule test --scenario-name docker

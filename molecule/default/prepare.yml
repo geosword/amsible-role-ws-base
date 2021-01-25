@@ -32,28 +32,4 @@
         - "grog.user"
         - "grog.authorized-key"
 
-    - name: check to see if there's a variable file with the keyservers in it.
-      ansible.builtin.stat:
-        path: ./vars/zzz_meta_keyservers.yml
-      register: keyserversyml
-      delegate_to: localhost
-
-    - name: output the variable so we can include it later
-      copy:
-        dest: ./vars/zz_meta_keyservers.yml
-        content: |
-          wsbase_pacman_key_servers:
-          {{ lookup('community.general.dig', '_pgpkey-http._tcp.eu.pool.sks-keyservers.net', 'qtype=SRV', wantlist=True) | to_nice_yaml }}
-        mode: '0444'
-      delegate_to: localhost
-      when:
-        - not keyserversyml.stat.exists
-
-    - name: output the environment
-      command: env
-      register: ghenv
-      delegate_to: localhost
-
-    - name: debug
-      ansible.builtin.debug:
-        var: ghenv.stdout
+- import_playbook: "../../getkeyservers.yml"

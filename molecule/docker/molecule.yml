@@ -20,7 +20,7 @@ driver:
   name: docker
 platforms:
   - name: geosword-base
-    group:
+    groups:
       - arch
     image: geosword/archpy:latest
     dockerfile: Dockerfile.j2

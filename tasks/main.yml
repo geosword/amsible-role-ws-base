@@ -3,7 +3,7 @@
   raw: "test -e /usr/bin/python || /usr/bin/pacman -Sy --noconfirm python"
   changed_when: false
 
-- name: include the pacman setup
+- name: include the pacman tasks
   include: pacman.yml
 
 - name: install packages

@@ -4,5 +4,5 @@
   tasks:
     - name: remove the keyservers yml
       file:
-        path: ./vars/zz_meta_keyservers.yml
+        path: ./molecule/docker/group_vars/arch/zz_meta_keyservers.yml
         state: absent

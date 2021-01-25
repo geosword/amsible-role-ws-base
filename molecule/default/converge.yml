@@ -6,14 +6,6 @@
   gather_facts: true
   tasks:
 
-    - name: include the the keyserver names
-      include_vars:
-        dir: ../docker/vars/
-        ignore_files:
-          - .keep
-        extensions:
-          - yml
-
     - name: "Include the role you are developing here"
       include_role:
         apply:

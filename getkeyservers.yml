@@ -1,0 +1,11 @@
+- name: lookup the keyservers from the srv record. This is only run in GH actions
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: This should happen in prepare but doesnt work in GH actions no matter what for reasons best known to itself
+      copy:
+        dest: ./molecule/docker/vars/zz_meta_keyservers.yml
+        content: |
+          wsbase_pacman_key_servers:
+          {{ lookup('community.general.dig', '_pgpkey-http._tcp.eu.pool.sks-keyservers.net', 'qtype=SRV', wantlist=True) | to_nice_yaml }}
+        mode: '0444'

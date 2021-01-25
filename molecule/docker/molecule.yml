@@ -10,6 +10,7 @@ scenario:
     - verify
     - destroy
   destroy_sequence:
+    - cleanup
     - destroy
   converge_sequence:
     - create

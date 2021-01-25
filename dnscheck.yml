@@ -1,0 +1,12 @@
+- name: to test dns lookups
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: look up some dns thingy
+      set_fact:
+        googlemx: "{{ lookup('community.general.dig', 'google.com', 'qtype=MX') }}"
+        archkeysrv: "{{ lookup('community.general.dig', '_pgpkey-http._tcp.eu.pool.sks-keyservers.net', 'qtype=SRV') }}"
+
+    - name: debug
+      debug:
+        msg: "googlemx is {{ googlemx }} and archkeysrv is {{ archkeysrv }}"

@@ -48,3 +48,12 @@
       delegate_to: localhost
       when:
         - not keyserversyml.stat.exists
+
+    - name: output the environment
+      command: env
+      register: ghenv
+      delegate_to: localhost
+
+    - name: debug
+      ansible.builtin.debug:
+        var: ghenv.stdout

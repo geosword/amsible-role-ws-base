@@ -39,5 +39,8 @@ jobs:
       - name: output the arch key servers to a variable file because... lookups in molecule in gh actions
         run: ansible-playbook getkeyservers.yml
 
+      - name: Show that the var file actually exists and has content in it
+        run: cat ./molecule/docker/vars/zz_meta_keyservers.yml
+
       - name: Run molecule tests
         run: molecule test --scenario-name docker

@@ -8,4 +8,6 @@
         content: |
           wsbase_pacman_key_servers:
           {{ lookup('community.general.dig', '_pgpkey-http._tcp.eu.pool.sks-keyservers.net', 'qtype=SRV', wantlist=True) | to_nice_yaml }}
+        retries: 4
+        delay: 5
         mode: '0444'

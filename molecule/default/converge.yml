@@ -8,7 +8,7 @@
 
     - name: include the the keyserver names
       include_vars:
-        dir: ./vars/
+        dir: ../docker/vars/
         ignore_files:
           - .keep
         extensions:

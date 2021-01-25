@@ -36,5 +36,8 @@ jobs:
       - name: Install test dependencies
         run: pip3 install -r requirements.txt
 
+      - name: output the arch key servers to a variable file because... lookups in molecule in gh actions
+        run: ansible-playbook getkeyservers.yml
+
       - name: Run molecule tests
         run: molecule test --scenario-name docker

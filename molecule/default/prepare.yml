@@ -31,5 +31,3 @@
       loop:
         - "grog.user"
         - "grog.authorized-key"
-
-- import_playbook: "../../getkeyservers.yml"

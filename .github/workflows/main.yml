@@ -40,7 +40,7 @@ jobs:
         run: ansible-playbook getkeyservers.yml
 
       - name: Show that the var file actually exists and has content in it
-        run: cat ./molecule/docker/vars/zz_meta_keyservers.yml
+        run: cat ./molecule/docker/group_vars/arch/zz_meta_keyservers.yml
 
       - name: Run molecule tests
         run: molecule test --scenario-name docker

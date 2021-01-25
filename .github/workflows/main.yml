@@ -34,7 +34,7 @@ jobs:
           python-version: '3.x'
 
       - name: install dnspython
-        run: pip install dnspython
+        run: pip install dnspython ansible
 
       - name: run the test playbook
         run: ansible-playbook dnscheck.yml

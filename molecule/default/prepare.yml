@@ -42,6 +42,12 @@
       delegate_to: localhost
 
     # for some reason this has stopped working now
+    - name: slurp
+      ansible.builtin.slurp:
+        src: "./vars/zz_meta_keyservers.yml"
+      register: keyservers
+      delegate_to: localhost
+
     - name: debug
-      debug:
-        msg: "{{ lookup('community.general.dig', '_pgpkey-http._tcp.eu.pool.sks-keyservers.net', 'qtype=SRV', wantlist=True) }}"
+      ansible.builtin.debug:
+        msg: "key servers are: {{ keyservers.content | b64decode }}"

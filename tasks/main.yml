@@ -15,3 +15,43 @@
 - name: install any pip packages
   pip:
     name: "{{ wsbase_pip_packages }}"
+
+
+# General system settings
+- name: replace /etc/resolv.conf with a link to system-resolved configuration
+  file:
+    src: /run/systemd/resolve/stub-resolv.conf
+    dest: /etc/resolv.conf
+    state: link
+    force: true
+  when:
+    - not (ansible_virtualization_type == 'virtualbox' or ansible_virtualization_type=='docker')
+
+- name: set the keyboard layout to UK
+  copy:
+    dest: /etc/vconsole.conf
+    content: 'KEYMAP=uk'
+    owner: root
+    group: root
+    mode: '0744'
+
+- name: set the timezone
+  timezone:
+    name: Europe/London
+
+- name: set the locale
+  locale_gen:
+    name: en_GB.UTF-8
+    state: present
+
+# TODO this really should be a template of some kind... perhaps we need a role to manage modules that get loaded at boot.
+- name: make sure vfat and others are loaded at boot to prevent problems updating the kernel
+  copy:
+    dest: /etc/modules-load.d/vfat.conf
+    content: |
+      vfat
+      nls_cp437
+      nls_iso8859-1
+    owner: root
+    group: root
+    mode: '0744'

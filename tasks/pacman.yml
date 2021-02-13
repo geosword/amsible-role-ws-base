@@ -19,14 +19,6 @@
   tags:
     - molecule-idempotence-notest
 
-- name: debug
-  debug:
-    var: wsbase_pacman_key_servers
-
-- name: debug actual lookup
-  debug:
-    msg: "{{ lookup('community.general.dig', '_pgpkey-http._tcp.eu.pool.sks-keyservers.net', 'qtype=SRV', wantlist=True) }}"
-
 - name: Refresh the pacman-keys {{ keyserver }} # noqa 301
   command: "/usr/bin/pacman-key --refresh-keys --keyserver {{ keyserver.split(' ')[3] }}"
   retries: "{{ wsbase_pacman_key_refresh_retries }}"
